@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerrianne Skidmore</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+      color: #2d2d2d;
+      background-color: #f4f6f8;
+      line-height: 1.6;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1f3a47, #2c5f6f);
+      color: #ffffff;
+      text-align: center;
+      padding: 90px 20px;
+    }
+    .hero h1 { font-size: 2.8rem; letter-spacing: 1px; margin-bottom: 10px; }
+    .hero p { font-size: 1.15rem; opacity: 0.92; max-width: 600px; margin: 0 auto; }
+    .actions { margin-top: 28px; }
+    .btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #1f3a47;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 26px;
+      border-radius: 30px;
+      margin: 6px;
+      transition: transform 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .container { max-width: 900px; margin: 0 auto; padding: 50px 20px; }
+    .about { text-align: center; margin-bottom: 50px; }
+    .about h2 { color: #2c5f6f; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .about p { max-width: 700px; margin: 0 auto; font-size: 1.05rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .card {
+      background: #ffffff;
+      border-top: 4px solid #2c5f6f;
+      border-radius: 8px;
+      padding: 26px 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .card h3 { color: #1f3a47; margin-bottom: 10px; font-size: 1.15rem; }
+    .card p { font-size: 0.98rem; color: #555; }
+    footer { text-align: center; padding: 30px; color: #777; font-size: 0.9rem; }
+    @media (max-width: 700px) {
+      .cards { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <h1>Kerrianne Skidmore</h1>
+    <p>Global Supply Chain Management student at BYU, hiker, and lifelong violinist.</p>
+    <div class="actions">
+      <a class="btn" href="pages/resume.html">View My Résumé</a>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="about">
+      <h2>About Me</h2>
+      <p>
+        I'm a Global Supply Chain Management student at Brigham Young University's
+        Marriott School of Business, where I focus on turning data into smarter, more
+        efficient operations. When I'm not studying logistics, you'll usually find me
+        out on a trail or behind a violin.
+      </p>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Studying</h3>
+        <p>Pursuing a B.S. in Global Supply Chain Management at BYU, focused on data, logistics, and operations.</p>
+      </div>
+      <div class="card">
+        <h3>On the Trail</h3>
+        <p>An avid hiker who loves exploring national parks and chasing the next great view.</p>
+      </div>
+      <div class="card">
+        <h3>On the Strings</h3>
+        <p>A violinist of 14+ years and a Suzuki Method graduate who still loves to play.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>&copy; 2026 Kerrianne Skidmore</footer>
+
+</body>
+</html>

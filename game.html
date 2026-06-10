@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>String Cheese Catcher</title>
+
+<a href = "pages/resume.html">Look at my resume!</a>
+
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle at center, #0a0a14, #000);
+  font-family: monospace;
+  color: #0ff;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  background: #0b0b18;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 20px #0ff;
+}
+
+#hud {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 16px;
+  text-shadow: 0 0 10px #0ff;
+}
+</style>
+</head>
+
+<body>
+
+<div id="hud">STRING CHEESE CATCHER | SCORE: 0</div>
+<canvas id="game" width="500" height="500"></canvas>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+const hud = document.getElementById("hud");
+
+const player = {
+  x: 220,
+  y: 450,
+  w: 60,
+  h: 20,
+  speed: 8
+};
+
+const cheese = {
+  x: Math.random() * 460,
+  y: -20,
+  size: 20,
+  fallSpeed: 4
+};
+
+let score = 0;
+
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") player.x -= player.speed;
+  if (e.key === "ArrowRight") player.x += player.speed;
+});
+
+// keep inside screen
+function clampPlayer() {
+  if (player.x < 0) player.x = 0;
+  if (player.x > 440) player.x = 440;
+}
+
+function resetCheese() {
+  cheese.x = Math.random() * 460;
+  cheese.y = -20;
+}
+
+function update() {
+  cheese.y += cheese.fallSpeed;
+
+  // collision
+  if (
+    cheese.y + cheese.size >= player.y &&
+    cheese.x >= player.x &&
+    cheese.x <= player.x + player.w
+  ) {
+    score++;
+    resetCheese();
+
+    // optional difficulty ramp
+    cheese.fallSpeed += 0.1;
+  }
+
+  // missed
+  if (cheese.y > 500) {
+    resetCheese();
+    cheese.fallSpeed = 4;
+    score = 0;
+  }
+
+  clampPlayer();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // player (basket)
+  ctx.fillStyle = "#ff4fd8";
+  ctx.shadowColor = "#ff4fd8";
+  ctx.shadowBlur = 20;
+  ctx.fillRect(player.x, player.y, player.w, player.h);
+
+  // cheese
+  ctx.shadowColor = "#ffd84d";
+  ctx.shadowBlur = 20;
+  ctx.fillStyle = "#ffd84d";
+  ctx.fillRect(cheese.x, cheese.y, cheese.size, cheese.size);
+
+  ctx.font = "16px monospace";
+  ctx.fillStyle = "#000";
+  ctx.fillText("🧀", cheese.x + 2, cheese.y + 16);
+
+  ctx.shadowBlur = 0;
+
+  hud.textContent = `STRING CHEESE CATCHER | SCORE: ${score}`;
+}
+
+function loop() {
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+
+</body>
+</html>
