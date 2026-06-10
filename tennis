@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis!!</title>
+     <link rel = "stylesheet" href = "style/tennis.css">
+
+     </head>
+<body>
+<a href = "pages/resume.html">Look at my resume!</a>
+<br>
+<a href = "pages/game.html">Play my game!</a>
+
+    <h1 id = "top">Tennis</h1>
+    <h1 >Tennis is the celestial sport!</h1>
+   
+<div style="width:600px; height:1514px; overflow:hidden; margin:0 auto;">
+  <div style="transform:scale(0.5); transform-origin:top left; width:1200px; height:3027px;">
+
+    <div class='tableauPlaceholder' id='viz1781115097892' style='position: relative'><noscript><a href='#'><img alt='The Tennis GOAT ' src='https://public.tableau.com/static/images/Th/TheGOATofTennis/TheTennisGOAT/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /><param name='embed_code_version' value='3' /><param name='site_root' value='' /><param name='name' value='TheGOATofTennis/TheTennisGOAT' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Th/TheGOATofTennis/TheTennisGOAT/1.png' /><param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+    <script type='text/javascript'>
+      var divElement = document.getElementById('viz1781115097892');
+      var vizElement = divElement.getElementsByTagName('object')[0];
+      vizElement.style.width='1200px';vizElement.style.height='3027px';
+      var scriptElement = document.createElement('script');
+      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+      vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+
+  </div>
+</div>
+</script>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/OXaEUUUJJ7s?si=xLdl0UMLJKWJUBFH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <h2>Female Tennis Players</h2>
+
+    <br>
+    <p></p>
+    <img src = "https://ichef.bbci.co.uk/ace/standard/2560/cpsprodpb/bf3f/live/433b0580-6260-11f1-b3cf-d1812da9c92f.jpg" alt = "Serena Williams" width = 400 >
+    <br>
+Serena Williams is a great tennis player who has inspired many people!
+    <br>
+    <br>
+<img src = "https://images.tennis.com/image/private/t_16-9_768/tenniscom-prd/z2hbxzsub6wmdqamovee.jpg" alt = "Iga Swiatek" width = 400 >
+<br>
+So is Iga Swiatek!
+
+<h3> water dwellers</h3>
+<img src = "https://cdn.mos.cms.futurecdn.net/SdBNKC7AjfH2AkvHPdWXyJ.jpg" alt = "water dinosaur" width = 200 >
+<br> <br>
+
+Learn more about dinosaurs <a href = "https://kids.nationalgeographic.com/animals/prehistoric" target="_blank"> here </a>
+
+<p> While true dinosaurs mostly lived on land, the massive Spinosaurus adapted to a water-dwelling lifestyle by using a paddle-like tail to swim through ancient rivers and hunt large fish. Meanwhile, the oceans of the dinosaur world were dominated by terrifying marine reptiles like the long-necked plesiosaurs and the giant, lizard-like mosasaurs. These ocean predators developed flippers instead of legs, allowing them to cruise through the deep water much like modern whales and sharks. Though people often call these ancient sea monsters "dinosaurs," they actually belonged to a completely separate branch of the reptile family tree.</p>
+<h4 class = "pinkclass orangeclass">spined water dwelling meat eaters</h4>
+<h5 class = "pinkclass"> pescaterians</h5>
+<h6>Spinosaurus</h6>
+    This is my favorite dinosaur. It is a TRex.<br>
+    <p>Long ago, North America was home to some of the most famous dinosaurs we know today. </p> 
+    <p>In places like Montana and Utah, the mighty <strong><em>Tyrannosaurus rex</em></strong> and the three-horned <strong><em>Triceratops</em></strong> walked across open, grassy areas. 
+        
+        <ol>
+            <li>They have spines!</li>
+            <li>They eat fish!</li>
+            <li> Those teeth sure are sharp...</li>
+
+<img src = "images/dino.png" alt = "words" width = 300 >
+<img src = "images/cute dino.webp" alt = "words" >
+
+
+        </ol>
+        
+        Millions of years before them, giant plant-eaters like <strong><em>Diplodocus</em></strong>, with its super long neck, and <strong><em>Stegosaurus</em></strong>, with the pointy plates on its back, ruled the land. Because the ground in the American West was just right for saving old bones, scientists have found thousands of amazing fossils there. <p>Over in Asia, especially in China and Mongolia, scientists have found very different kinds of dinosaurs. The dry Gobi Desert is where the quick, smart <strong><em>Velociraptor</em></strong> lived. China is extra famous because its rocks have saved more than just bones—they also saved footprints, skin, and even feathers! This is how we found <strong><em>Sinosauropteryx</em></strong>, a small dinosaur covered in fuzzy feathers. Finding this little creature proved to the world that ancient dinosaurs are actually the grandparents of the birds we see outside today. </p> If you travel down to South America and Africa, you find the real giants of the dinosaur world. In Argentina, scientists dug up <strong><em>Argentinosaurus</em></strong>, a plant-eater that was longer than three school buses parked end-to-end! They also found <strong><em>Spinosaurus</em></strong> in Africa, a huge meat-eater with a sail on its back that spent its time swimming and catching fish like a giant crocodile. Even cold Antarctica had its own dinosaurs, showing that these amazing creatures found a way to live in every single part of the world.</p>
+        <a href = "#top">Go to top</a>
+</body>
+</html>
