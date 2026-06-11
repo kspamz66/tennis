@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8" />
 <title>String Cheese Catcher</title>
-
-<a href = "resume.html">Look at my resume!</a>
-
 <style>
 body {
   margin: 0;
@@ -15,27 +12,61 @@ body {
   overflow: hidden;
 }
 
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  z-index: 10;
+}
+
+.nav a {
+  display: inline-block;
+  color: #0ff;
+  text-decoration: none;
+  border: 1px solid #0ff;
+  border-radius: 6px;
+  padding: 6px 14px;
+  margin-right: 10px;
+  text-shadow: 0 0 8px #0ff;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.nav a:hover {
+  background: #0ff;
+  color: #0b0b18;
+  text-shadow: none;
+}
+
+#hud {
+  font-size: 16px;
+  text-shadow: 0 0 10px #0ff;
+}
+
 canvas {
   display: block;
-  margin: auto;
+  margin: 70px auto 0;
   background: #0b0b18;
   border: 2px solid #0ff;
   box-shadow: 0 0 20px #0ff;
 }
-
-#hud {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  font-size: 16px;
-  text-shadow: 0 0 10px #0ff;
-}
 </style>
 </head>
-
 <body>
 
-<div id="hud">STRING CHEESE CATCHER | SCORE: 0</div>
+<div class="topbar">
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="resume.html">Resume</a>
+    <a href="tennis.html">Tennis</a>
+  </div>
+  <div id="hud">STRING CHEESE CATCHER | SCORE: 0</div>
+</div>
+
 <canvas id="game" width="500" height="500"></canvas>
 
 <script>
