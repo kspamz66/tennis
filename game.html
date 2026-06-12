@@ -49,10 +49,18 @@ body {
 
 canvas {
   display: block;
-  margin: 70px auto 0;
+  margin: 64px auto 0;
   background: #0b0b18;
   border: 2px solid #0ff;
   box-shadow: 0 0 20px #0ff;
+}
+
+.instructions {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+  color: #0ff;
+  text-shadow: 0 0 8px #0ff;
 }
 </style>
 </head>
@@ -64,10 +72,11 @@ canvas {
     <a href="resume.html">Resume</a>
     <a href="tennis.html">Tennis</a>
   </div>
-  <div id="hud">STRING CHEESE CATCHER | SCORE: 0</div>
+  <div id="hud">SCORE: 0   BEST: 0   ❤️❤️❤️</div>
 </div>
 
 <canvas id="game" width="500" height="500"></canvas>
+<p class="instructions">Use the ← and → arrow keys to catch the falling string cheese. You have 3 lives!</p>
 
 <script>
 const canvas = document.getElementById("game");
@@ -79,7 +88,7 @@ const player = {
   y: 450,
   w: 60,
   h: 20,
-  speed: 20
+  speed: 15
 };
 
 const cheese = {
@@ -90,11 +99,28 @@ const cheese = {
 };
 
 let score = 0;
+let best = 0;
+let lives = 3;
+let gameOver = false;
 
 document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") player.x -= player.speed;
   if (e.key === "ArrowRight") player.x += player.speed;
+  if (gameOver && (e.key === "r" || e.key === "R" || e.key === "Enter")) restart();
 });
+
+// click to restart after a game over
+canvas.addEventListener("click", () => {
+  if (gameOver) restart();
+});
+
+function restart() {
+  score = 0;
+  lives = 3;
+  cheese.fallSpeed = 4;
+  resetCheese();
+  gameOver = false;
+}
 
 // keep inside screen
 function clampPlayer() {
@@ -108,6 +134,8 @@ function resetCheese() {
 }
 
 function update() {
+  if (gameOver) return;
+
   cheese.y += cheese.fallSpeed;
 
   // collision
@@ -117,17 +145,22 @@ function update() {
     cheese.x <= player.x + player.w
   ) {
     score++;
+    if (score > best) best = score;
     resetCheese();
 
-    // optional difficulty ramp
+    // difficulty ramp
     cheese.fallSpeed += 0.1;
   }
 
   // missed
   if (cheese.y > 500) {
+    lives--;
     resetCheese();
     cheese.fallSpeed = 4;
-    score = 0;
+    if (lives <= 0) {
+      gameOver = true;
+      if (score > best) best = score;
+    }
   }
 
   clampPlayer();
@@ -154,7 +187,28 @@ function draw() {
 
   ctx.shadowBlur = 0;
 
-  hud.textContent = `STRING CHEESE CATCHER | SCORE: ${score}`;
+  // game over screen
+  if (gameOver) {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.72)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0ff";
+    ctx.shadowColor = "#0ff";
+    ctx.shadowBlur = 20;
+    ctx.textAlign = "center";
+
+    ctx.font = "42px monospace";
+    ctx.fillText("GAME OVER", 250, 220);
+
+    ctx.font = "20px monospace";
+    ctx.fillText("Final Score: " + score, 250, 270);
+    ctx.fillText("Press R or click to play again", 250, 310);
+
+    ctx.textAlign = "left";
+    ctx.shadowBlur = 0;
+  }
+
+  hud.textContent = `SCORE: ${score}   BEST: ${best}   ${"❤️".repeat(lives)}`;
 }
 
 function loop() {
