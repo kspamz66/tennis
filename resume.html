@@ -10,36 +10,65 @@
       font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
       color: #2d2d2d;
       background-color: #f4f6f8;
-      line-height: 1.5;
-      padding: 30px 15px;
+      line-height: 1.6;
     }
-    .resume {
-      max-width: 800px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
-    header {
+
+    /* Banner header */
+    .hero {
+      background: linear-gradient(135deg, #1f3a47, #2c5f6f);
+      color: #ffffff;
       text-align: center;
-      border-bottom: 3px solid #2c5f6f;
-      padding-bottom: 18px;
-      margin-bottom: 25px;
+      padding: 60px 20px 40px;
     }
-    header h1 { font-size: 2.2rem; color: #1f3a47; letter-spacing: 1px; }
-    .contact { margin-top: 8px; font-size: 0.9rem; color: #555; }
-    .contact a { color: #2c5f6f; text-decoration: none; }
-    section { margin-bottom: 28px; }
-    h2 {
+    .hero h1 { font-size: 2.4rem; letter-spacing: 1px; margin-bottom: 8px; }
+    .hero .tagline { font-size: 1.05rem; opacity: 0.92; margin-bottom: 20px; }
+    .hero-links a {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 8px 18px;
+      margin: 5px;
+      border-radius: 30px;
+      transition: transform 0.15s ease;
+    }
+    .hero-links a:hover { transform: translateY(-2px); }
+    .socials { margin-top: 14px; }
+    .socials a {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      background: #ffffff;
+      color: #1f3a47;
+      padding: 9px 20px;
+      margin: 5px;
+      border-radius: 30px;
+      transition: transform 0.15s ease;
+    }
+    .socials a:hover { transform: translateY(-2px); }
+
+    /* Content cards */
+    .container { max-width: 860px; margin: 0 auto; padding: 40px 20px; }
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+    .card h2 {
       font-size: 1.2rem;
       color: #2c5f6f;
       text-transform: uppercase;
       letter-spacing: 1px;
       border-bottom: 1px solid #d9dee2;
       padding-bottom: 6px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
+    .about p { font-size: 1.05rem; }
+
     .entry { margin-bottom: 16px; }
     .entry-head { display: flex; justify-content: space-between; flex-wrap: wrap; }
     .title { font-weight: 600; color: #1f3a47; }
@@ -48,28 +77,48 @@
     ul { margin-left: 20px; }
     li { margin-bottom: 4px; }
     .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
-    .back-home {
-      display: inline-block;
-      margin-top: 10px;
-      color: #2c5f6f;
-      text-decoration: none;
-      font-weight: 600;
+
+    footer { text-align: center; padding: 30px; color: #777; font-size: 0.9rem; }
+
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
-  <div class="resume">
 
-    <header>
-      <h1>Kerrianne R. Skidmore</h1>
-      <div class="contact">
-        <a href="mailto:kerrianne.skidmore@gmail.com">kerrianne.skidmore@gmail.com</a>
-        &nbsp;|&nbsp;
-        <a href="https://www.linkedin.com/in/kerrianne-skidmore/" target="_blank">linkedin.com/in/kerrianne-skidmore</a>
-      </div>
-    </header>
+  <header class="hero">
+    <h1>Kerrianne R. Skidmore</h1>
+    <p class="tagline">Global Supply Chain Management Student · BYU Marriott School of Business</p>
+    <div class="hero-links">
+      <a href="index.html">Home</a>
+      <a href="tennis.html">Tennis</a>
+      <a href="game.html">Game</a>
+    </div>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/kerrianne-skidmore/" target="_blank">LinkedIn</a>
+      <a href="mailto:kerrianne.skidmore@gmail.com">Email Me</a>
+    </div>
+  </header>
 
-    <section>
+  <main class="container">
+
+    <section class="card about">
+      <h2>About Me</h2>
+      <p>
+        I'm a Global Supply Chain Management student at BYU's Marriott School of Business
+        with a passion for turning data into smarter, more efficient operations. My experience
+        spans nonprofit consulting in Cambodia, team leadership at the Harold B. Lee Library,
+        and public-service work abroad, roles that have sharpened my skills in logistics,
+        analytics, and rallying people around a shared goal. Outside of class, I'm a lifelong
+        violinist and an avid hiker always chasing the next trail. I'm seeking opportunities
+        where I can apply analytical thinking and a service-minded approach to real supply
+        chain challenges.
+      </p>
+    </section>
+
+    <section class="card">
       <h2>Education</h2>
       <div class="entry">
         <div class="entry-head">
@@ -87,7 +136,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="card">
       <h2>Skills</h2>
       <ul class="skills-grid">
         <li>Excel (VBA, pivot tables, solver)</li>
@@ -97,7 +146,7 @@
       </ul>
     </section>
 
-    <section>
+    <section class="card">
       <h2>Experience</h2>
 
       <div class="entry">
@@ -165,7 +214,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="card">
       <h2>Honors &amp; Activities</h2>
       <ul>
         <li>Third Place, Wear With Purpose business model case competition</li>
@@ -175,8 +224,9 @@
       </ul>
     </section>
 
-    <a class="back-home" href="index.html">&larr; Back to Home</a>
+  </main>
 
-  </div>
+  <footer>&copy; 2026 Kerrianne Skidmore</footer>
+
 </body>
 </html>
