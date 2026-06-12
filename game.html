@@ -24,19 +24,23 @@ body {
   z-index: 10;
 }
 
-.nav a {
+.nav a, .sound-btn {
   display: inline-block;
   color: #0ff;
+  background: transparent;
   text-decoration: none;
   border: 1px solid #0ff;
   border-radius: 6px;
   padding: 6px 14px;
   margin-right: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  cursor: pointer;
   text-shadow: 0 0 8px #0ff;
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
   transition: background 0.2s ease, color 0.2s ease;
 }
-.nav a:hover {
+.nav a:hover, .sound-btn:hover {
   background: #0ff;
   color: #0b0b18;
   text-shadow: none;
@@ -71,24 +75,26 @@ canvas {
     <a href="index.html">Home</a>
     <a href="resume.html">Resume</a>
     <a href="tennis.html">Tennis</a>
+    <button id="soundBtn" class="sound-btn">🔊 Music</button>
   </div>
   <div id="hud">SCORE: 0   BEST: 0   ❤️❤️❤️</div>
 </div>
 
 <canvas id="game" width="500" height="500"></canvas>
-<p class="instructions">Use the ← and → arrow keys to catch the falling string cheese. You have 3 lives!</p>
+<p class="instructions">Use the ← and → arrow keys to catch the falling string cheese. You have 3 lives. Music starts when you move!</p>
 
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const hud = document.getElementById("hud");
+const soundBtn = document.getElementById("soundBtn");
 
 const player = {
   x: 220,
   y: 450,
   w: 60,
   h: 20,
-  speed: 15
+  speed: 18
 };
 
 const cheese = {
@@ -102,15 +108,73 @@ let score = 0;
 let best = 0;
 let lives = 3;
 let gameOver = false;
+let bubbleTimer = 0;   // frames the "Go Cougars!" bubble stays up
 
+/* ---------- Audio (Web Audio API, no files needed) ---------- */
+let audioCtx = null;
+let musicOn = true;
+let musicTimer = null;
+let step = 0;
+
+const melody = [659, 659, 784, 784, 880, 880, 784, 0, 698, 698, 659, 659, 587, 587, 523, 0];
+const bass = [131, 175, 196, 147];
+
+function initAudio() {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    startMusic();
+  } catch (e) { /* audio unsupported, game still works */ }
+}
+
+function playTone(freq, duration, type, volume) {
+  if (!audioCtx || !musicOn) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  const now = audioCtx.currentTime;
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.linearRampToValueAtTime(volume, now + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start(now);
+  osc.stop(now + duration);
+}
+
+function startMusic() {
+  if (musicTimer) return;
+  musicTimer = setInterval(() => {
+    if (!musicOn || !audioCtx) return;
+    const note = melody[step % melody.length];
+    if (note) playTone(note, 0.18, "triangle", 0.10);
+    if (step % 4 === 0) playTone(bass[Math.floor(step / 4) % bass.length], 0.35, "sine", 0.16);
+    step++;
+  }, 200);
+}
+
+function catchSound() {
+  playTone(988, 0.10, "square", 0.20);
+  setTimeout(() => playTone(1318, 0.12, "square", 0.20), 60);
+}
+
+soundBtn.addEventListener("click", () => {
+  initAudio();
+  musicOn = !musicOn;
+  soundBtn.textContent = musicOn ? "🔊 Music" : "🔇 Muted";
+});
+
+/* ---------- Controls ---------- */
 document.addEventListener("keydown", e => {
+  initAudio();
   if (e.key === "ArrowLeft") player.x -= player.speed;
   if (e.key === "ArrowRight") player.x += player.speed;
   if (gameOver && (e.key === "r" || e.key === "R" || e.key === "Enter")) restart();
 });
 
-// click to restart after a game over
 canvas.addEventListener("click", () => {
+  initAudio();
   if (gameOver) restart();
 });
 
@@ -118,11 +182,12 @@ function restart() {
   score = 0;
   lives = 3;
   cheese.fallSpeed = 4;
+  bubbleTimer = 0;
   resetCheese();
   gameOver = false;
 }
 
-// keep inside screen
+/* ---------- Game logic ---------- */
 function clampPlayer() {
   if (player.x < 0) player.x = 0;
   if (player.x > 440) player.x = 440;
@@ -146,9 +211,9 @@ function update() {
   ) {
     score++;
     if (score > best) best = score;
+    bubbleTimer = 48;     // show "Go Cougars!"
+    catchSound();
     resetCheese();
-
-    // difficulty ramp
     cheese.fallSpeed += 0.1;
   }
 
@@ -163,9 +228,55 @@ function update() {
     }
   }
 
+  if (bubbleTimer > 0) bubbleTimer--;
   clampPlayer();
 }
 
+/* ---------- Speech bubble ---------- */
+function drawBubble(centerX, topY, text) {
+  ctx.font = "bold 16px 'Trebuchet MS', sans-serif";
+  const w = ctx.measureText(text).width + 28;
+  const h = 34;
+  let x = centerX - w / 2;
+  if (x < 6) x = 6;
+  if (x + w > canvas.width - 6) x = canvas.width - 6 - w;
+  const y = topY;
+  const r = 10;
+
+  // bubble body
+  ctx.fillStyle = "#ffffff";
+  ctx.strokeStyle = "#002E5D";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // pointer
+  const px = Math.min(Math.max(centerX, x + 20), x + w - 20);
+  ctx.beginPath();
+  ctx.moveTo(px - 8, y + h - 1);
+  ctx.lineTo(px, y + h + 12);
+  ctx.lineTo(px + 8, y + h - 1);
+  ctx.closePath();
+  ctx.fillStyle = "#ffffff";
+  ctx.fill();
+
+  // text
+  ctx.fillStyle = "#002E5D";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, x + w / 2, y + h / 2);
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+}
+
+/* ---------- Render ---------- */
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -186,6 +297,11 @@ function draw() {
   ctx.fillText("🧀", cheese.x + 2, cheese.y + 16);
 
   ctx.shadowBlur = 0;
+
+  // speech bubble
+  if (bubbleTimer > 0) {
+    drawBubble(player.x + player.w / 2, 392, "Go Cougars!");
+  }
 
   // game over screen
   if (gameOver) {
